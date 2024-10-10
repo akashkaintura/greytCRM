@@ -1,3 +1,4 @@
+// src/app/services/employee.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,7 +8,7 @@ import { Employee } from '../models/employee.model';
   providedIn: 'root'
 })
 export class EmployeeService {
-  private apiUrl = 'http://localhost:5000/api/employees';
+  private apiUrl = 'http://localhost:3000/api/employees';
 
   constructor(private http: HttpClient) { }
 
@@ -15,9 +16,19 @@ export class EmployeeService {
     return this.http.get<Employee[]>(this.apiUrl);
   }
 
-  addEmployee(employee: Employee): Observable<Employee> {
+  getEmployee(id: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.apiUrl}/${id}`);
+  }
+
+  createEmployee(employee: Omit<Employee, 'id'>): Observable<Employee> {
     return this.http.post<Employee>(this.apiUrl, employee);
   }
 
-  // Add more methods for update and delete operations
+  updateEmployee(id: number, employee: Partial<Employee>): Observable<Employee> {
+    return this.http.patch<Employee>(`${this.apiUrl}/${id}`, employee);
+  }
+
+  deleteEmployee(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

@@ -1,0 +1,35 @@
+.app-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  nav {
+    width: 200px;
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin-bottom: 10px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  nav ul li a.active {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  main {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }

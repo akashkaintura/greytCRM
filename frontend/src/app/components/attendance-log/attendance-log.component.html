@@ -1,1 +1,32 @@
-<p>attendance-log works!</p>
+<div class="attendance-log-container">
+    <h2>Attendance Log</h2>
+
+    <div *ngIf="loading" class="loading-spinner">
+        Loading...
+    </div>
+
+    <div *ngIf="error" class="error-message">
+        {{ error }}
+    </div>
+
+    <table *ngIf="!loading && !error" class="attendance-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Employee ID</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let record of attendanceRecords">
+                <td>{{ record.date | date:'shortDate' }}</td>
+                <td>{{ record.employeeId }}</td>
+                <td>{{ record.checkIn | date:'shortTime' }}</td>
+                <td>{{ record.checkOut | date:'shortTime' }}</td>
+                <td [ngClass]="getStatusClass(record.status)">{{ record.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

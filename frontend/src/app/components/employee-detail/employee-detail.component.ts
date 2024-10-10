@@ -21,6 +21,13 @@ export class EmployeeDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.employeeService.getEmployees().subscribe(employees => {
+      console.log('Employees:', employees);
+    },
+      error => {
+        console.error('Error fetching employees:', error);
+      }
+    );
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
 

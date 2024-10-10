@@ -1,1 +1,48 @@
-<p>leave-request works!</p>
+<div class="leave-request-container">
+    <h2>Submit Leave Request</h2>
+
+    <div *ngIf="leaveBalance" class="leave-balance">
+        <h3>Your Leave Balance</h3>
+        <p>Annual Leave: {{ leaveBalance.annualLeave }} days</p>
+        <p>Sick Leave: {{ leaveBalance.sickLeave }} days</p>
+        <p>Personal Leave: {{ leaveBalance.personalLeave }} days</p>
+    </div>
+
+    <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <input type="date" id="startDate" formControlName="startDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="endDate">End Date</label>
+            <input type="date" id="endDate" formControlName="endDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="type">Leave Type</label>
+            <select id="type" formControlName="type" required>
+                <option value="">Select Leave Type</option>
+                <option value="annual">Annual Leave</option>
+                <option value="sick">Sick Leave</option>
+                <option value="personal">Personal Leave</option>
+                <option value="unpaid">Unpaid Leave</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="reason">Reason</label>
+            <textarea id="reason" formControlName="reason" required></textarea>
+        </div>
+
+        <button type="submit" [disabled]="!leaveForm.valid || submitting">Submit Leave Request</button>
+    </form>
+
+    <div *ngIf="submitSuccess" class="success-message">
+        Leave request submitted successfully!
+    </div>
+
+    <div *ngIf="submitError" class="error-message">
+        {{ submitError }}
+    </div>
+</div>

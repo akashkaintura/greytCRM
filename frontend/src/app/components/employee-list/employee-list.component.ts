@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeService } from '../../services/employee.service';
 import { Employee } from '../../models/employee.model';
 
@@ -9,8 +8,9 @@ import { Employee } from '../../models/employee.model';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'email', 'position', 'department', 'actions'];
-  dataSource = new MatTableDataSource<Employee>();
+  employees: Employee[] = [];
+  loading = false;
+  error: string | null = null;
 
   constructor(private employeeService: EmployeeService) { }
 
@@ -19,23 +19,16 @@ export class EmployeeListComponent implements OnInit {
   }
 
   loadEmployees(): void {
+    this.loading = true;
     this.employeeService.getEmployees().subscribe(
-      (employees) => {
-        this.dataSource.data = employees;
+      (data) => {
+        this.employees = data;
+        this.loading = false;
       },
       (error) => {
-        console.error('Error loading employees', error);
-      }
-    );
-  }
-
-  deleteEmployee(id: string): void {
-    this.employeeService.deleteEmployee(id).subscribe(
-      () => {
-        this.loadEmployees();
-      },
-      (error) => {
-        console.error('Error deleting employee', error);
+        this.error = 'Failed to load employees. Please try again later.';
+        this.loading = false;
+        console.error('Error loading employees:', error);
       }
     );
   }

@@ -1,0 +1,38 @@
+.attendance-log-container {
+    padding: 20px;
+  }
+  
+  .attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .attendance-table th, .attendance-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .attendance-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .attendance-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .loading-spinner, .error-message {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  .status-present { color: green; }
+  .status-absent { color: red; }
+  .status-late { color: orange; }
+  .status-half-day { color: blue; }

@@ -1,0 +1,24 @@
+<div class="dashboard-container">
+    <h1>HR Dashboard</h1>
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <h3>Overall Attendance Rate</h3>
+            <p>{{attendanceRate}}%</p>
+        </div>
+        <div class="metric-card">
+            <h3>Pending Leave Requests</h3>
+            <p>{{pendingLeaveRequests}}</p>
+        </div>
+        <div class="metric-card">
+            <h3>Employees Present Today</h3>
+            <p>{{presentToday}}</p>
+        </div>
+        <div class="metric-card">
+            <h3>Total Leave Days This Month</h3>
+            <p>{{totalLeaveDays}}</p>
+        </div>
+    </div>
+    <div class="chart-container">
+        <canvas id="monthlyAttendanceChart"></canvas>
+    </div>
+</div>
